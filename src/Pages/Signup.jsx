@@ -50,6 +50,7 @@ const Signup = () => {
       password,
       id: Date.now(), // استخدام الوقت الحالي كـ id فريد
     };
+    
 
     // إضافة المستخدم إلى الـ users في السياق
     setUsers([...users, newUser]);
