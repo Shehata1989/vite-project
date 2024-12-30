@@ -19,8 +19,8 @@ const Header = () => {
           className={({ isActive }) =>
             `transition-all duration-200 tracking-wide ${
               isActive
-                ? "text-red-500 hover:text-red-600 hover:tracking-widest tracking-widest"
-                : "text-white hover:text-red-500 hover:tracking-widest"
+                ? "text-blue-500 hover:text-blue-500 hover:tracking-widest tracking-widest"
+                : "text-white hover:text-blue-500 hover:tracking-widest"
             }`
           }
         >
