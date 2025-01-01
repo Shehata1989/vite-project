@@ -1,11 +1,21 @@
 import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { authConText } from "../authContext";
+import { useEffect } from "react";
+import { useRef } from "react";
 
 const Signup = () => {
   const [error, setError] = useState(""); // استخدام useState لتخزين الخطأ
   const Auth = useContext(authConText); // الحصول على السياق
   const { users, setUsers } = Auth; // استرجاع الـ users و setUsers من السياق
+
+  const navigator = useNavigate();
+
+  const InputRef = useRef(null);
+
+  useEffect(() => {
+    InputRef.current.focus();
+  }, []);
 
   // دالة للتحقق من الحقول
   const validateFields = (username, email, password) => {
@@ -50,15 +60,18 @@ const Signup = () => {
       password,
       id: Date.now(), // استخدام الوقت الحالي كـ id فريد
     };
-    
 
     // إضافة المستخدم إلى الـ users في السياق
     setUsers([...users, newUser]);
+    navigator("/login");
     e.target.reset();
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-md rounded-lg shadow-md">
+    <form
+      onSubmit={handleSubmit}
+      className="w-full max-w-md rounded-lg shadow-md"
+    >
       <h2 className="mb-6 text-2xl font-bold text-center text-blue-500">
         Create an Account
       </h2>
@@ -69,10 +82,10 @@ const Signup = () => {
           Username
         </label>
         <input
+          ref={InputRef}
           type="text"
           id="username"
           name="username"
-          required
           className="w-full px-4 py-2 text-black border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
@@ -86,7 +99,6 @@ const Signup = () => {
           type="email"
           id="email"
           name="email"
-          required
           className="w-full px-4 py-2 text-black border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
@@ -100,8 +112,6 @@ const Signup = () => {
           type="password"
           id="password"
           name="password"
-          required
-          minLength={8}
           className="w-full px-4 py-2 text-black border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
