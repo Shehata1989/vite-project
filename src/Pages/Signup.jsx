@@ -1,8 +1,6 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authConText } from "../authContext";
-import { useEffect } from "react";
-import { useRef } from "react";
 
 const Signup = () => {
   const [error, setError] = useState(""); // استخدام useState لتخزين الخطأ
@@ -10,12 +8,6 @@ const Signup = () => {
   const { users, setUsers } = Auth; // استرجاع الـ users و setUsers من السياق
 
   const navigator = useNavigate();
-
-  const InputRef = useRef(null);
-
-  useEffect(() => {
-    InputRef.current.focus();
-  }, []);
 
   // دالة للتحقق من الحقول
   const validateFields = (username, email, password) => {
@@ -82,7 +74,6 @@ const Signup = () => {
           Username
         </label>
         <input
-          ref={InputRef}
           type="text"
           id="username"
           name="username"

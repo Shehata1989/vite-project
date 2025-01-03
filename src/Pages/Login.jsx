@@ -1,20 +1,14 @@
 import { useContext, useState } from "react";
 import { authConText } from "../authContext";
-import { useRef } from "react";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [user, setUser] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false); // تصحيح اسم المتغير
-  const InputRef = useRef(null);
   const Navigate = useNavigate();
   const Auth = useContext(authConText);
 
-useEffect(() => {
-  InputRef.current.focus();
-},[])
 
   const validateFields = ({ username, password }) => {
     if (!username) {
@@ -70,7 +64,6 @@ useEffect(() => {
       <div className="w-full mb-4">
         <label className="block mb-1 text-sm font-medium">Username</label>
         <input
-        ref={InputRef}
           value={user.username}
           onChange={(e) => setUser({ ...user, username: e.target.value })}
           name="username"
